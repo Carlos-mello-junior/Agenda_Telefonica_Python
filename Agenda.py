@@ -9,12 +9,12 @@ from os import system
 
 lista = []
 
-def cadastrar(nome, numero):
-    dicionario = {
+def dicionario(nome, numero):
+    contato = {
         "Nome": nome,
         "Número": numero
     }
-    lista.append(dicionario)
+    lista.append(contato)
 
 def menu():
     opc = int(input('''
@@ -42,7 +42,7 @@ Opção desejada:  '''))
 def cadastrar_contato():
     nome = str(input("Nome: "))
     numero = int(input("Telefone: "))
-    cadastrar(nome, numero)
+    dicionario(nome, numero)
     system('cls')
     print("Adicionado com sucesso!!!")
 
@@ -60,19 +60,35 @@ def pesquisar_contato():
                 print(f"{chave}: {valor}")
 
 def alterar_contato():
-    alterar = str(input('Qual deseja alterar? '))
+    alterar = str(input('A quem deseja alterar? '))
+    system('cls')
+    escolha = menu_alterar()
     for i in lista:
-        if i['Nome'] == alterar:
-            system('cls')
-            novo_nome = str(input("Novo nome: "))
-            novo_numero = int(input("Novo numero: "))
-            local = lista.index(i)
-            lista[local] = {
-                "Nome": novo_nome,
-                "Número": novo_numero
-            }
-            system('cls')
-            print("Alterado com sucesso!!!")
+        if i["Nome"] == alterar:
+            match escolha:
+                case 1:
+                    system('cls')
+                    novo_nome = str(input("Novo nome: "))
+                    i["Nome"] = novo_nome
+                    system('cls')
+                    print("Alterado com sucesso!!!")
+                case 2:
+                    system('cls')
+                    novo_numero = str(input("Novo numero: "))
+                    i["Número"] = novo_numero
+                    system('cls')
+                    print("Alterado com sucesso!!!")   
+                case 3:
+                    system('cls')
+                    novo_nome = str(input("Novo nome: "))
+                    novo_numero = int(input("Novo numero: "))
+                    local = lista.index(i)
+                    lista[local] = {
+                        "Nome": novo_nome,
+                        "Número": novo_numero
+                    }
+                    system('cls')
+                    print("Alterado com sucesso!!!")
         else:
             print('não se encontra na lista!!!') 
  
